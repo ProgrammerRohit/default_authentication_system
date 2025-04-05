@@ -1,0 +1,31 @@
+{% extends 'myapp/base.html' %}
+{% block title %} Login {% endblock title %}
+{% load custom_filters %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-6 border border-dark rounded shadow mt-4 p-5">
+            <h1 class="text-center mb-3">Login Form</h1>
+            <form action="" method="POST" novalidate>
+                {% csrf_token %} 
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <p>{{error}}</p>
+                    {% endfor %}
+                {% endif %}
+                {% for frm in uform %}
+                    {{frm.label_tag}}  <br>
+                    {{frm|add_class:"form-control"}} <br>
+                    {{frm.errors}}
+                {% endfor %}
+                <div class="d-grid gap-2">
+                    <input type="submit" value="Login" class="btn btn-success">
+                </div>
+            </form>
+            <div class="mt-2 text-center">
+                <a href="{% url 'signup' %}">Register Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
